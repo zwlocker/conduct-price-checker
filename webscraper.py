@@ -5,6 +5,13 @@ import smtplib
 from email.message import EmailMessage
 import boto3
 from decimal import Decimal
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+email_user = os.getenv("EMAIL_USER")
+email_password = os.getenv("EMAIL_PASSWORD")
 
 database = boto3.resource('dynamodb', region_name='us-east-1')
 table = database.Table('conductPriceTable')
@@ -36,7 +43,7 @@ def lambda_handler(event, context):
 def send_email(final_price):
     s = smtplib.SMTP('smtp.gmail.com', 587)
     s.starttls()
-    s.login("zwlprgm@gmail.com", "coge ujvz dfhb yimo")
+    s.login(email_user, email_password)
     message = EmailMessage()
     message['Subject'] = "Price change!"
     message['From'] = "zwlprgm@gmail.com"
