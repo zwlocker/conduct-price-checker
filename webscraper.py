@@ -46,7 +46,7 @@ def send_email(final_price):
     s.login(email_user, email_password)
     message = EmailMessage()
     message['Subject'] = "Price change!"
-    message['From'] = "zwlprgm@gmail.com"
+    message['From'] = email_user
     message['To'] = "zacharywlocker@gmail.com"
 
     message.set_content(f"Conduct Together is on sale for ${final_price}!")
